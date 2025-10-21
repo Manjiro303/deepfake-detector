@@ -8,7 +8,11 @@
       "backgroundColor": "#8B5CF6"
     },
     "android": {
-      "package": "com.deepfake.detector"
+      "package": "com.deepfake.detector",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#8B5CF6"
+      }
     },
     "ios": {
       "bundleIdentifier": "com.deepfake.detector"
