@@ -49,11 +49,10 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
       
-      - name: 🎯 Initialize EAS Project
+      - name: 🎯 Create EAS Project
         run: |
-          PROJECT_ID=$(cat /proc/sys/kernel/random/uuid)
-          echo "Generated Project ID: $PROJECT_ID"
-          eas init --id $PROJECT_ID --non-interactive
+          echo "Creating EAS project..."
+          eas project:create --non-interactive || echo "Project may already exist"
       
       - name: 📱 Build APK
         run: eas build --platform android --profile preview --non-interactive
