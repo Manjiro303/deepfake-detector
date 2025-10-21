@@ -3,6 +3,7 @@
     "name": "Deepfake Detector",
     "slug": "deepfake-detector",
     "version": "1.0.0",
+    "owner": "YOUR_EXPO_USERNAME",
     "icon": "./assets/icon.png",
     "splash": {
       "backgroundColor": "#8B5CF6"
