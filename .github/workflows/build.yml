@@ -49,10 +49,9 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
       
-      - name: 🎯 Create EAS Project
+      - name: 🎯 Configure & Build
         run: |
-          echo "Creating EAS project..."
-          eas project:create --non-interactive || echo "Project may already exist"
-      
-      - name: 📱 Build APK
-        run: eas build --platform android --profile preview --non-interactive
+          echo "Configuring EAS build..."
+          eas build:configure
+          echo "Starting build..."
+          eas build --platform android --profile preview --non-interactive
