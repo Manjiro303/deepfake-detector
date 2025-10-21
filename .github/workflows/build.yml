@@ -49,15 +49,9 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
       
-      - name: 🎯 Create EAS Project
+      - name: 🔑 Generate Keystore (if needed)
         run: |
-          echo "Creating EAS project..."
-          eas build:configure || echo "Already configured"
-      
-      - name: 🔐 Generate Android Credentials
-        run: |
-          echo "Generating Android keystore..."
-          eas credentials --platform android --non-interactive || echo "Credentials may already exist"
-      
-      - name: 📱 Build APK
-        run: eas build --platform android --profile preview --non-interactive
+          # Try to build, if keystore missing, create it by piping 'y'
+          (echo "y" | eas build --platform android --profile preview) || \
+          eas build --platform android --profile preview --non-interactive
+        continue-on-error: false
