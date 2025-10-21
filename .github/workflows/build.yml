@@ -54,5 +54,10 @@ jobs:
           echo "Creating EAS project..."
           eas build:configure || echo "Already configured"
       
+      - name: 🔐 Generate Android Credentials
+        run: |
+          echo "Generating Android keystore..."
+          eas credentials --platform android --non-interactive || echo "Credentials may already exist"
+      
       - name: 📱 Build APK
         run: eas build --platform android --profile preview --non-interactive
