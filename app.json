@@ -13,11 +13,6 @@
     },
     "ios": {
       "bundleIdentifier": "com.deepfake.detector"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "your-unique-project-id-here"
-      }
     }
   }
 }
