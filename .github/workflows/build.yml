@@ -50,7 +50,10 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
       
       - name: 🎯 Initialize EAS Project
-        run: eas project:init --non-interactive || true
+        run: |
+          PROJECT_ID=$(cat /proc/sys/kernel/random/uuid)
+          echo "Generated Project ID: $PROJECT_ID"
+          eas init --id $PROJECT_ID --non-interactive
       
       - name: 📱 Build APK
         run: eas build --platform android --profile preview --non-interactive
