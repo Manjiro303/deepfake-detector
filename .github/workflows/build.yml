@@ -49,21 +49,8 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
       
-      - name: 🎯 Configure EAS Project
-        run: |
-          if ! grep -q '"extra"' app.json; then
-            # Add projectId to app.json
-            node -e "
-              const fs = require('fs');
-              const app = JSON.parse(fs.readFileSync('app.json', 'utf8'));
-              if (!app.expo.extra) app.expo.extra = {};
-              if (!app.expo.extra.eas) app.expo.extra.eas = {};
-              if (!app.expo.extra.eas.projectId) {
-                app.expo.extra.eas.projectId = '$(uuidgen)';
-              }
-              fs.writeFileSync('app.json', JSON.stringify(app, null, 2));
-            "
-          fi
+      - name: 🎯 Initialize EAS Project
+        run: eas project:init --non-interactive || true
       
       - name: 📱 Build APK
         run: eas build --platform android --profile preview --non-interactive
