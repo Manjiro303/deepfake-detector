@@ -35,34 +35,43 @@ export default function App() {
   };
 
   return (
-    
-      🛡️ Deepfake Detector
+    <View style={styles.container}>
+      <Text style={styles.title}>🛡️ Deepfake Detector</Text>
 
       {video && (
-        
+        <Video
+          source={{ uri: video }}
+          style={styles.video}
+          useNativeControls
+          resizeMode="contain"
+        />
       )}
 
-      
-        📹 Choose Video
-      
+      <TouchableOpacity style={styles.btn} onPress={pickVideo}>
+        <Text style={styles.btnText}>📹 Choose Video</Text>
+      </TouchableOpacity>
 
       {video && (
-        
-          
+        <TouchableOpacity 
+          style={[styles.btn, styles.analyzeBtn]} 
+          onPress={analyze}
+          disabled={loading}
+        >
+          <Text style={styles.btnText}>
             {loading ? '⏳ Analyzing...' : '🔍 Analyze'}
-          
-        
+          </Text>
+        </TouchableOpacity>
       )}
 
       {result && (
-        
-          
+        <View style={styles.result}>
+          <Text style={styles.resultText}>
             {result.prediction === 'REAL' ? '✅' : '❌'} {result.prediction}
-          
-          Confidence: {(result.confidence * 100).toFixed(1)}%
-        
+          </Text>
+          <Text>Confidence: {(result.confidence * 100).toFixed(1)}%</Text>
+        </View>
       )}
-    
+    </View>
   );
 }
 
