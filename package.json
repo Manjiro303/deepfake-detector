@@ -1,7 +1,7 @@
 {
   "name": "deepfake-detector",
   "version": "1.0.0",
-"main": "index.js",
+  "main": "index.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -11,6 +11,7 @@
     "expo": "~50.0.0",
     "expo-image-picker": "~14.7.1",
     "expo-av": "~13.10.4",
+    "expo-file-system": "~16.0.6",
     "react": "18.2.0",
     "react-native": "0.73.6"
   }
