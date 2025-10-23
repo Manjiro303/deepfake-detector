@@ -11,47 +11,63 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: 📥 Checkout
+      - name: 📥 Checkout Code
         uses: actions/checkout@v4
       
-      - name: 📦 Setup Node
+      - name: 📦 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'
       
-      - name: 📥 Install
-        run: npm install
+      - name: 📥 Install Dependencies
+        run: npm ci
       
-      - name: ✅ Success
-        run: echo "✨ Dependencies installed!"
+      - name: ✅ Dependencies Installed
+        run: echo "✨ All dependencies installed successfully!"
 
   build:
-    name: Build APK
+    name: Build APK with EAS
     runs-on: ubuntu-latest
     needs: test
     if: github.event_name == 'workflow_dispatch'
     
     steps:
-      - name: 📥 Checkout
+      - name: 📥 Checkout Code
         uses: actions/checkout@v4
       
-      - name: 📦 Setup Node
+      - name: 📦 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'
       
-      - name: 📥 Install
-        run: npm install
+      - name: 📥 Install Dependencies
+        run: npm ci
       
-      - name: 🔐 Setup Expo
+      - name: 🔐 Setup Expo and EAS
         uses: expo/expo-github-action@v8
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
       
-      - name: 🔑 Generate Keystore (if needed)
+      - name: 🔍 Verify EAS Configuration
         run: |
-          # Try to build, if keystore missing, create it by piping 'y'
-          (echo "y" | eas build --platform android --profile preview) || \
-          eas build --platform android --profile preview --non-interactive
-        continue-on-error: false
+          echo "Checking EAS configuration..."
+          eas config
+      
+      - name: 🏗️ Build APK
+        env:
+          # Pass the Hugging Face token to the build
+          EXPO_PUBLIC_HUGGINGFACE_TOKEN: ${{ secrets.EXPO_PUBLIC_HUGGINGFACE_TOKEN }}
+        run: |
+          echo "🚀 Starting APK build..."
+          eas build --platform android --profile preview --non-interactive --no-wait
+          echo "✅ Build submitted successfully!"
+      
+      - name: 📝 Build Info
+        run: |
+          echo "🎉 Build has been submitted to EAS!"
+          echo "📱 Check build status at: https://expo.dev"
+          echo "⏱️ Build typically takes 10-15 minutes"
+          echo "📥 Download your APK from the Expo dashboard when ready"
