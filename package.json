@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "expo": "~50.0.0",
-    "expo-image-picker": "~14.7.1",
+    "expo-image-picker": "~15.0.7",
     "expo-av": "~13.10.4",
     "expo-file-system": "~16.0.6",
     "react": "18.2.0",
