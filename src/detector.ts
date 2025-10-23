@@ -1,7 +1,7 @@
 import * as FileSystem from 'expo-file-system';
 
 // Get FREE API key from https://huggingface.co/settings/tokens
-const HUGGINGFACE_API_KEY = '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'; // TODO: Add your Hugging Face token
+const HUGGINGFACE_API_KEY = ''; // TODO: Add your Hugging Face token
 
 // Using a free deepfake detection model
 const MODEL_URL = 'https://api-inference.huggingface.co/models/dima806/deepfake_vs_real_image_detection';
