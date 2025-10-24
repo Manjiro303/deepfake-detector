@@ -58,7 +58,6 @@ jobs:
       
       - name: 🏗️ Build APK
         env:
-          # Pass the Hugging Face token to the build
           EXPO_PUBLIC_HUGGINGFACE_TOKEN: ${{ secrets.EXPO_PUBLIC_HUGGINGFACE_TOKEN }}
         run: |
           echo "🚀 Starting APK build..."
