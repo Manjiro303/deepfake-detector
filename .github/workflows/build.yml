@@ -18,10 +18,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
       
       - name: 📥 Install Dependencies
-        run: npm ci
+        run: npm install
       
       - name: ✅ Dependencies Installed
         run: echo "✨ All dependencies installed successfully!"
@@ -40,10 +39,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
       
       - name: 📥 Install Dependencies
-        run: npm ci
+        run: npm install
       
       - name: 🔐 Setup Expo and EAS
         uses: expo/expo-github-action@v8
@@ -51,20 +49,16 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
       
-      - name: 🔍 Verify EAS Configuration
-        run: |
-          echo "Checking EAS configuration..."
-          eas config
-      
       - name: 🏗️ Build APK
         env:
           EXPO_PUBLIC_HUGGINGFACE_TOKEN: ${{ secrets.EXPO_PUBLIC_HUGGINGFACE_TOKEN }}
         run: |
-          echo "🚀 Starting APK build..."
-          eas build --platform android --profile preview --non-interactive --no-wait
-          echo "✅ Build submitted successfully!"
+          echo "🚀 Starting APK build with EAS..."
+          echo "📦 Building for Android (Preview Profile)"
+          eas build --platform android --profile preview --non-interactive
       
       - name: 📝 Build Info
+        if: success()
         run: |
           echo "🎉 Build has been submitted to EAS!"
           echo "📱 Check build status at: https://expo.dev"
