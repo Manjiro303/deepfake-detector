@@ -2,3 +2,20 @@ node_modules/
 .expo/
 *.log
 .DS_Store
+
+# Environment variables - NEVER commit these!
+.env
+.env.local
+.env.*.local
+
+# Build folders
+android/
+ios/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# Note: package-lock.json is NOT ignored (needed for CI/CD)
